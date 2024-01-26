@@ -8,11 +8,16 @@ class Model(models.Model):
         return self.title
     
 
-class Autos(models.Model):
+class Auto(models.Model):
+    model = models.ForeignKey(Model, on_delete=models.DO_NOTHING, related_name="autos")
+
+
     kennzeichen = models.CharField(max_length=150)
-    name= models.CharField(max_length=200)
-    vorname = models.CharField(max_length=250)
-    date= models.CharField(max_length=200)
-    vin= models.CharField()
-    besitzer= models.CharField(max_length=250)
-    modelId = models.ForeignKey()
+    name = models.CharField(max_length=200)
+    vorname = models.CharField(max_length=250, null=True, blank=True)
+    date = models.DateTimeField()
+    vin = models.CharField(max_length=200)
+    firma = models.CharField(max_length=250, null=True, blank=True)
+
+    def __str__(self):
+        return self.kennzeichen
