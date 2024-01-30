@@ -15,7 +15,10 @@ class AutoSerializer(serializers.ModelSerializer):
             'firma',
             'get_image',
             'get_thumbnail',
-            'get_absolute_url'
+            'get_absolute_url',
+            'title',
+            'hersteller',
+            'kilometerstand',
         )
 
 class ModelSeriaizer(serializers.ModelSerializer):
@@ -24,7 +27,18 @@ class ModelSeriaizer(serializers.ModelSerializer):
         fields=(
             'title',
             'id',
-              'get_image',
+            'get_image',
+            'get_fahrz',
 
+
+        )
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AutoImage
+        fields=(
+            'title',
+            'model_id',
+            'get_image',
         )
 

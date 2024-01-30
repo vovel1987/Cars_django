@@ -7,3 +7,4 @@ from .models import *
 
 admin.site.register(Model)
 admin.site.register(Auto)
+admin.site.register(AutoImage)
