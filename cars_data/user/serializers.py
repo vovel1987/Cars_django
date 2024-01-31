@@ -37,8 +37,12 @@ class ImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = AutoImage
         fields=(
-            'title',
-            'model_id',
+            'auto',
+            'image',
             'get_image',
+            'title',
+            'get_absolute_url',
+            'slot',
+            
         )
 

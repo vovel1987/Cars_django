@@ -77,16 +77,28 @@ class Auto(models.Model):
         return thumbnail
 
 
+def user_directory_path(instance, filename): 
+  
+    # file will be uploaded to MEDIA_ROOT / user_<id>/<filename> 
+       return 'autos/auto_{0}/{1}'.format(instance.auto.id, filename)
 class AutoImage(models.Model):
-    image_id = models.ForeignKey(Auto,on_delete=models.DO_NOTHING,related_name='images')
+    auto = models.ForeignKey(Auto, on_delete=models.DO_NOTHING, related_name="images")
     title=models.CharField(max_length=200)
-    image = models.ImageField(upload_to='1/',blank=True,null=True)
+    image = models.ImageField(upload_to=user_directory_path,blank=True,null=True)
+    default_image = models.ImageField(upload_to=user_directory_path,blank=True,null=True)
+    slug = models.SlugField(null=True)
+    slot = models.PositiveSmallIntegerField(default=1)
     
     
+
     def __str__(self):
         return self.title
     
     def get_image(self):
         if self.image:
             return   self.image.url
-        return ''
+        return self.default_image.url
+   
+    
+    def get_absolute_url(self):
+        return f'/{self.auto.slug}/{self.slug}/'
