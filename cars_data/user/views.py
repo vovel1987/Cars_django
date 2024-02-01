@@ -4,8 +4,8 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .models import Auto,Model,AutoImage
-from .serializers import AutoSerializer,ModelSeriaizer,ImageSerializer
+from .models import Auto,Model,AutoImage,Bewertung
+from .serializers import AutoSerializer,ModelSeriaizer,ImageSerializer,BewertungSerializer
 
 class AutosList(APIView):
     def get(self,request,format=None):
@@ -19,6 +19,26 @@ class ModelsList(APIView):
         serializer= ModelSeriaizer(models,many=True)
         return Response(serializer.data)
     
+class BewertungList(APIView):
+   def get(self,request,format=None):
+       bewertungs = Bewertung.objects.all()
+       serializer= BewertungSerializer(bewertungs,many=True)
+       return Response(serializer.data)
+
+class BewertungAuto(APIView):
+    def get_object(self,auto):
+        try:
+            return Bewertung.objects.filter(auto=auto)
+        except Auto.DoesNotExist:
+            raise Http404
+        
+    def get(self,request,auto,format=None):
+       bewertungs = self.get_object(auto)
+       serializer= BewertungSerializer(bewertungs,many=True)
+       return Response(serializer.data)
+        
+    
+
 
 # class ImagesList(APIView):
 #     def get(self,request,format=None):

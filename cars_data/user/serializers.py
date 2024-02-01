@@ -46,3 +46,19 @@ class ImageSerializer(serializers.ModelSerializer):
             
         )
 
+class BewertungSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Bewertung
+        fields=(
+            'auto',
+            'autos_seite',
+            'component_autos_seite',
+            'element_in_component',
+            'schaden_descr',
+            'schaden_value',
+            'preis',
+            'get_image',
+            'image_schaden',
+            
+        )
+

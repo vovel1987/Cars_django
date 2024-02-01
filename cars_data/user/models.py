@@ -85,7 +85,7 @@ class AutoImage(models.Model):
     auto = models.ForeignKey(Auto, on_delete=models.DO_NOTHING, related_name="images")
     title=models.CharField(max_length=200)
     image = models.ImageField(upload_to=user_directory_path,blank=True,null=True)
-    default_image = models.ImageField(upload_to=user_directory_path,blank=True,null=True)
+
     slug = models.SlugField(null=True)
     slot = models.PositiveSmallIntegerField(default=1)
     
@@ -97,8 +97,32 @@ class AutoImage(models.Model):
     def get_image(self):
         if self.image:
             return   self.image.url
-        return self.default_image.url
+       
    
     
     def get_absolute_url(self):
         return f'/{self.auto.slug}/{self.slug}/'
+    
+def schaden_directory_path(instance, filename): 
+  
+    # file will be uploaded to MEDIA_ROOT / user_<id>/<filename> 
+       return 'schaden/auto_{0}/{1}'.format(instance.auto.id, filename)
+    
+class Bewertung(models.Model):
+    auto = models.ForeignKey(Auto,on_delete =models.DO_NOTHING,related_name='bewertungs')
+    title = models.CharField(max_length= 250, null=True)
+    autos_seite = models.CharField(max_length = 250)
+    component_autos_seite = models.CharField(max_length=250)
+    element_in_component = models.CharField(max_length=250,null=True, blank=True)
+    schaden_descr = models.CharField(max_length=250)
+    schaden_value= models.CharField(max_length = 250)
+    preis = models.IntegerField()
+    image_schaden = models.ImageField(upload_to=schaden_directory_path,blank=True,null=True)
+
+    def __str__(self):
+        return self.title
+    
+    def get_image(self):
+        if self.image_schaden:
+            return self.image_schaden.url
+
