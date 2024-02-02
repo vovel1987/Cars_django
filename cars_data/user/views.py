@@ -4,8 +4,8 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .models import Auto,Model,AutoImage,Bewertung
-from .serializers import AutoSerializer,ModelSeriaizer,ImageSerializer,BewertungSerializer
+from .models import Auto,Model,AutoImage,Bewertung,AutoZubehor,AutoReifen,AutoLackMessung
+from .serializers import AutoSerializer,ModelSeriaizer,ImageSerializer,BewertungSerializer,AutoZubehorSerializer,AutoReifenSerializer,AutoLackMessungSerializer
 
 class AutosList(APIView):
     def get(self,request,format=None):
@@ -36,8 +36,41 @@ class BewertungAuto(APIView):
        bewertungs = self.get_object(auto)
        serializer= BewertungSerializer(bewertungs,many=True)
        return Response(serializer.data)
-        
     
+class AutoZubehorList(APIView):
+    def get_object(self,auto):
+        try:
+            return AutoZubehor.objects.filter(auto=auto)
+        except:
+            raise Http404
+    def get(self,request,auto,format=None):
+        zubehors = self.get_object(auto)
+        serializer = AutoZubehorSerializer(zubehors,many=True)
+        return Response(serializer.data)
+        
+class AutoReifenList(APIView):
+    def get_object(self,auto):
+        try:
+            return AutoReifen.objects.filter(auto=auto)
+        except:
+            raise Http404
+    
+    def get(self,request,auto,format=None):
+        reifens = self.get_object(auto)
+        serializer = AutoReifenSerializer(reifens,many=True)
+        return Response(serializer.data)
+
+
+class AutoLackMessungList(APIView):
+    def get_object(self,auto):
+        try:
+            return AutoLackMessung.objects.filter(auto=auto)
+        except:
+            return Http404
+    def get(self,auto):
+        mesungs = self.get_object(auto)
+        serializer = AutoLackMessungSerializer(mesungs,many=True)
+        return Response(serializer.data)
 
 
 # class ImagesList(APIView):

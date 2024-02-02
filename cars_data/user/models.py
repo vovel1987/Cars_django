@@ -125,4 +125,92 @@ class Bewertung(models.Model):
     def get_image(self):
         if self.image_schaden:
             return self.image_schaden.url
+        
+
+class AutoZubehor(models.Model):
+    auto = models.ForeignKey(Auto,on_delete=models.DO_NOTHING,related_name='zubehors')
+    title = models.CharField(max_length = 200)
+    zweitschlüssel = models.BooleanField()
+    paletot = models.BooleanField()
+    rad_8_fach= models.BooleanField()
+    windschott = models.BooleanField()
+    FBAKS = models.BooleanField()
+    reifenfüllkit = models.BooleanField()
+    servicemappe = models.BooleanField()
+    elektronikkarte = models.BooleanField()
+    bordwerkzeug = models.BooleanField()
+    warndreieck = models.BooleanField()
+    radiokarte = models.BooleanField()
+    ladegerät = models.BooleanField()
+    verbandskasten = models.BooleanField()
+    garantieheft = models.BooleanField()
+    zusatzInfo = models.CharField(max_length=250,null=True,blank=True)
+    bremse = models.CharField(max_length=250,null=True)
+
+    def __str__(self):
+        return self.title
+    
+class AutoReifen(models.Model):
+    auto = models.ForeignKey(Auto,on_delete=models.DO_NOTHING,related_name='reifens')
+    title = models.CharField(max_length = 200)
+    reifen = models.CharField(max_length=20)
+    reifenname = models.CharField(max_length = 200)
+    profil = models.CharField(max_length=100)
+    dimension = models.CharField(max_length = 100)
+    index = models.CharField(max_length=100)
+    dot= models.CharField(max_length=100)
+    tpms= models.CharField(max_length=100)
+    winter= models.CharField(max_length=100)
+    verschlies = models.CharField(max_length =100,null=True)
+    belage = models.CharField(max_length=100 ,null=True)
+    radspiel = models.CharField(max_length=100 ,null=True)
+    lenspiel = models.CharField(max_length=100 ,null=True)
+    stange = models.CharField(max_length=100 ,null=True)
+    
+
+    def __str__(self):
+        return self.title
+    
+class AutoLackMessung(models.Model):
+    auto = models.ForeignKey(Auto,on_delete=models.DO_NOTHING,related_name='messungs')
+    title=models.CharField(max_length=50)
+    kotflügelFS=models.CharField(max_length=50,null=True,blank=True)
+    türFS=models.CharField(max_length=50,null=True,blank=True)
+    seitenpaneleFS=models.CharField(max_length=50,null=True,blank=True)
+    schwellerFS=models.CharField(max_length=50,null=True,blank=True)
+    kotflügelBS=models.CharField(max_length=50,null=True,blank=True)
+    türBS=models.CharField(max_length=50,null=True,blank=True)
+    seitenpaneleBS=models.CharField(max_length=50,null=True,blank=True)
+    schwellerBS=models.CharField(max_length=50,null=True,blank=True)
+    stosStangeF= models.CharField(max_length=50,null=True,blank=True)
+    motorhaubeF=models.CharField(max_length=50,null=True,blank=True)
+    heckHeck=models.CharField(max_length=50,null=True,blank=True)
+    stosStangeHeck=models.CharField(max_length=50,null=True,blank=True)
+    spoilerHeck=models.CharField(max_length=50,null=True,blank=True)
+    dach=models.CharField(max_length=50,null=True,blank=True)
+    hardTopDach=models.CharField(max_length=50,null=True,blank=True)
+
+    def __str__(self):
+        return self.title
+
+
+
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

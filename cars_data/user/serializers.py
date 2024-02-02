@@ -62,3 +62,69 @@ class BewertungSerializer(serializers.ModelSerializer):
             
         )
 
+class AutoZubehorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AutoZubehor
+        fields =(
+           
+            'zweitschlüssel',
+            'paletot',
+            'rad_8_fach',
+            'windschott',
+            'FBAKS',
+            'reifenfüllkit',
+            'servicemappe',
+            'elektronikkarte',
+            'bordwerkzeug',
+            'warndreieck',
+            'radiokarte',
+            'ladegerät',
+            'verbandskasten',
+            'garantieheft',
+            'zusatzInfo',
+            'bremse',
+
+        )
+
+
+class AutoReifenSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AutoReifen
+        fields=(
+            'reifen',
+            'reifenname',
+            'profil',
+            'dimension',
+            'index',
+            'dot',
+            'tpms',
+            'winter',
+            'verschlies',
+            'belage',
+            'stange',
+            'radspiel',
+            'lenspiel',
+        )
+
+
+class AutoLackMessungSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AutoLackMessung
+        fields=(
+            'kotflügelFS',
+            'türFS',
+            'seitenpaneleFS',
+            'schwellerFS',
+            'kotflügelBS',
+            'türBS',
+            'seitenpaneleBS',
+            'schwellerBS',
+            'stosStangeF',
+            'motorhaubeF',
+            'heckHeck',
+            'stosStangeHeck',
+            'spoilerHeck',
+            'dach',
+            'hardTopDach',
+        )
+
