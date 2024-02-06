@@ -14,8 +14,8 @@ class AutoSerializer(serializers.ModelSerializer):
             'vin',
             'firma',
             'get_image',
-            'get_thumbnail',
-            'get_absolute_url',
+            # 'get_thumbnail',
+            # 'get_absolute_url',
             'title',
             'hersteller',
             'kilometerstand',
@@ -29,6 +29,7 @@ class ModelSeriaizer(serializers.ModelSerializer):
             'id',
             'get_image',
             'get_fahrz',
+           
 
 
         )

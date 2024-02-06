@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import Http404
+from rest_framework import generics
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -13,9 +14,25 @@ class AutosList(APIView):
         serializer = AutoSerializer(autos, many=True)
         return Response(serializer.data)
     
-class ModelsList(APIView):
+class ModelsList(generics.ListAPIView):
+    queryset = Model.objects.all()
+
     def get(self,request,format=None):
+        query = self.request.GET.get("search",'')
+        print(query)
+       
+        
         models = Model.objects.all()
+        if query !='undefined'  :
+          
+            models = Model.objects.filter(title__icontains=query)  
+         
+        
+        if query=='':
+            models = Model.objects.all()
+              
+        
+           
         serializer= ModelSeriaizer(models,many=True)
         return Response(serializer.data)
     
@@ -67,7 +84,7 @@ class AutoLackMessungList(APIView):
             return AutoLackMessung.objects.filter(auto=auto)
         except:
             return Http404
-    def get(self,auto):
+    def get(self,request,auto,format=None):
         mesungs = self.get_object(auto)
         serializer = AutoLackMessungSerializer(mesungs,many=True)
         return Response(serializer.data)

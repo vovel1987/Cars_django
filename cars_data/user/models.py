@@ -9,7 +9,7 @@ class Model(models.Model):
     title= models.CharField(max_length=200)
     slug= models.SlugField(null=True)
     image = models.ImageField(upload_to='uploads/',blank=True,null=True)
-    fahrz = models.IntegerField( null= True)
+    
     
 
     def __str__(self):
@@ -27,6 +27,8 @@ class Model(models.Model):
        
         return self.autos.all().count()
         
+ 
+        
 
 
 class Auto(models.Model):
@@ -38,17 +40,17 @@ class Auto(models.Model):
     date = models.DateTimeField()
     vin = models.CharField(max_length=200)
     firma = models.CharField(max_length=250, null=True, blank=True)
-    slug = models.SlugField(null=True)
+    # slug = models.SlugField(null=True)
     image = models.ImageField(upload_to='uploads/',blank=True,null=True)
-    thumbnail = models.ImageField(upload_to='uploads/',blank=True,null=True)
+    # thumbnail = models.ImageField(upload_to='uploads/',blank=True,null=True)
     hersteller=models.CharField(max_length=200,null=True)
     kilometerstand = models.IntegerField(null= True)
 
     def __str__(self):
         return self.kennzeichen
     
-    def get_absolute_url(self):
-        return f'/{self.model.slug}/{self.slug}/'
+    # def get_absolute_url(self):
+    #     return f'/{self.model.slug}/{self.slug}/'
     
     def get_image(self):
         if self.image:
@@ -67,14 +69,14 @@ class Auto(models.Model):
                else:
                    return ''
                
-    def make_thumbnail(self,image, size=(300,200)):
-        img=Image.open(image)
-        img.convert('RGB')
-        img.thumbnail(size)
-        thumb_io=BytesIO()
-        img.save(thumb_io,'JPEG',quality=85)
-        thumbnail = File(thumb_io,name=image.name)
-        return thumbnail
+    # def make_thumbnail(self,image, size=(300,200)):
+    #     img=Image.open(image)
+    #     img.convert('RGB')
+    #     img.thumbnail(size)
+    #     thumb_io=BytesIO()
+    #     img.save(thumb_io,'JPEG',quality=85)
+    #     thumbnail = File(thumb_io,name=image.name)
+    #     return thumbnail
 
 
 def user_directory_path(instance, filename): 
