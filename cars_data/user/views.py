@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import Http404
+from django.views.generic.edit import UpdateView
 from rest_framework import generics
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
-from .models import Auto,Model,AutoImage,Bewertung,AutoZubehor,AutoReifen,AutoLackMessung
-from .serializers import AutoSerializer,ModelSeriaizer,ImageSerializer,BewertungSerializer,AutoZubehorSerializer,AutoReifenSerializer,AutoLackMessungSerializer
+from .models import *
+from .serializers import *
 
 class AutosList(APIView):
     def get(self,request,format=None):
@@ -140,6 +141,16 @@ class ModelAuto(APIView):
          serializer = AutoSerializer(auto,many=True)
          return Response(serializer.data) 
         
+
+
+class AutoUpdateView(generics.UpdateAPIView):
+    queryset = Auto.objects.all()
+    serializer_class = AutoPatchSerializer
+
+   
+class AutoPostView(generics.CreateAPIView):
+    queryset = Auto.objects.all()
+    serializer_class = AutoPatchSerializer
      
         
       

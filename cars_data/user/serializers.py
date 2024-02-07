@@ -14,13 +14,31 @@ class AutoSerializer(serializers.ModelSerializer):
             'vin',
             'firma',
             'get_image',
+            'image',
             # 'get_thumbnail',
             # 'get_absolute_url',
             'title',
             'hersteller',
             'kilometerstand',
+           
         )
-
+class AutoPatchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Auto
+        fields=(
+            'model',
+            'id',
+            'kennzeichen',
+            'name',
+            'vorname',
+            'date',
+            'vin',
+            'firma',
+            'image',
+            'title',
+            'hersteller',
+            'kilometerstand',
+        )
 class ModelSeriaizer(serializers.ModelSerializer):
     class Meta:
         model= Model

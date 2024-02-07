@@ -22,9 +22,6 @@ class Model(models.Model):
             return  self.image.url
         return ''
     def get_fahrz(self):
-        # numers = Auto.objects.all().count()
-        # numers = Model.objects.annotate(num_model = Count('autos'))
-       
         return self.autos.all().count()
         
  
@@ -37,7 +34,7 @@ class Auto(models.Model):
     kennzeichen = models.CharField(max_length=150 ,null=True)
     name = models.CharField(max_length=200)
     vorname = models.CharField(max_length=250, null=True, blank=True)
-    date = models.DateTimeField()
+    date = models.DateTimeField(null=True, blank=True)
     vin = models.CharField(max_length=200)
     firma = models.CharField(max_length=250, null=True, blank=True)
     # slug = models.SlugField(null=True)
@@ -52,6 +49,8 @@ class Auto(models.Model):
     # def get_absolute_url(self):
     #     return f'/{self.model.slug}/{self.slug}/'
     
+    
+
     def get_image(self):
         if self.image:
             return   self.image.url
@@ -83,6 +82,8 @@ def user_directory_path(instance, filename):
   
     # file will be uploaded to MEDIA_ROOT / user_<id>/<filename> 
        return 'autos/auto_{0}/{1}'.format(instance.auto.id, filename)
+
+
 class AutoImage(models.Model):
     auto = models.ForeignKey(Auto, on_delete=models.DO_NOTHING, related_name="images")
     title=models.CharField(max_length=200)
