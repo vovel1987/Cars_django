@@ -10,8 +10,6 @@ class Model(models.Model):
     slug= models.SlugField(null=True)
     image = models.ImageField(upload_to='uploads/',blank=True,null=True)
     
-    
-
     def __str__(self):
         return self.title
     def get_absolute_url(self):
@@ -49,8 +47,6 @@ class Auto(models.Model):
     # def get_absolute_url(self):
     #     return f'/{self.model.slug}/{self.slug}/'
     
-    
-
     def get_image(self):
         if self.image:
             return   self.image.url
@@ -89,7 +85,7 @@ class AutoImage(models.Model):
     title=models.CharField(max_length=200)
     image = models.ImageField(upload_to=user_directory_path,blank=True,null=True)
 
-    slug = models.SlugField(null=True)
+    # slug = models.SlugField(null=True)
     slot = models.PositiveSmallIntegerField(default=1)
     
     
@@ -100,11 +96,9 @@ class AutoImage(models.Model):
     def get_image(self):
         if self.image:
             return   self.image.url
-       
+    # def get_absolute_url(self):
+    #     return f'/{self.auto.slug}/{self.slug}/'
    
-    
-    def get_absolute_url(self):
-        return f'/{self.auto.slug}/{self.slug}/'
     
 def schaden_directory_path(instance, filename): 
   

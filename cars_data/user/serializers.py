@@ -60,7 +60,7 @@ class ImageSerializer(serializers.ModelSerializer):
             'image',
             'get_image',
             'title',
-            'get_absolute_url',
+            # 'get_absolute_url',
             'slot',
             
         )
