@@ -40,6 +40,7 @@ class Auto(models.Model):
     # thumbnail = models.ImageField(upload_to='uploads/',blank=True,null=True)
     hersteller=models.CharField(max_length=200,null=True)
     kilometerstand = models.IntegerField(null= True)
+    schaden=models.BooleanField(null= True)
 
     def __str__(self):
         return self.kennzeichen
@@ -113,8 +114,9 @@ class Bewertung(models.Model):
     element_in_component = models.CharField(max_length=250,null=True, blank=True)
     schaden_descr = models.CharField(max_length=250)
     schaden_value= models.CharField(max_length = 250)
-    preis = models.IntegerField()
+    preis = models.IntegerField(null=True, blank=True)
     image_schaden = models.ImageField(upload_to=schaden_directory_path,blank=True,null=True)
+    schaden = models.BooleanField(null= True)
 
     def __str__(self):
         return self.title

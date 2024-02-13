@@ -20,6 +20,7 @@ class AutoSerializer(serializers.ModelSerializer):
             'title',
             'hersteller',
             'kilometerstand',
+            'schaden',
            
         )
 class AutoPatchSerializer(serializers.ModelSerializer):
@@ -38,6 +39,7 @@ class AutoPatchSerializer(serializers.ModelSerializer):
             'title',
             'hersteller',
             'kilometerstand',
+            
         )
 class ModelSeriaizer(serializers.ModelSerializer):
     class Meta:
@@ -78,6 +80,7 @@ class BewertungSerializer(serializers.ModelSerializer):
             'preis',
             'get_image',
             'image_schaden',
+            'schaden',
             
         )
 
