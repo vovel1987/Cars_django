@@ -18,5 +18,7 @@ urlpatterns = [
     path('autos/vehicle/<slug:model_id>/',ModelAuto.as_view()),
     path('autos/',  AutosList.as_view()),
     path('autos/<slug:model_id>/',ModelAutos.as_view()),
+    path('cars/filter/',ModelListFilterReparatur.as_view()),
+    path('cars/filterpreis/',ModelListtFilterPreis.as_view())
 
 ]

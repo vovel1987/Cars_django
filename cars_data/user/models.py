@@ -40,7 +40,8 @@ class Auto(models.Model):
     # thumbnail = models.ImageField(upload_to='uploads/',blank=True,null=True)
     hersteller=models.CharField(max_length=200,null=True)
     kilometerstand = models.IntegerField(null= True)
-    schaden=models.BooleanField(null= True)
+    # schaden=models.BooleanField(null= True)
+  
 
     def __str__(self):
         return self.kennzeichen
@@ -53,17 +54,17 @@ class Auto(models.Model):
             return   self.image.url
         return ''
     
-    def get_thumbnail(self):
-           if self.thumbnail:
-            return  self.thumbnail.url
-           else:
-               if self.image:
-                   self.thumbnail = self.make_thumbnail(self.image)
-                   self.save()
+    # def get_thumbnail(self):
+    #        if self.thumbnail:
+    #         return  self.thumbnail.url
+    #        else:
+    #            if self.image:
+    #                self.thumbnail = self.make_thumbnail(self.image)
+    #                self.save()
 
-                   return   self.thumbnail.url
-               else:
-                   return ''
+    #                return   self.thumbnail.url
+    #            else:
+    #                return ''
                
     # def make_thumbnail(self,image, size=(300,200)):
     #     img=Image.open(image)
@@ -108,6 +109,7 @@ def schaden_directory_path(instance, filename):
     
 class Bewertung(models.Model):
     auto = models.ForeignKey(Auto,on_delete =models.DO_NOTHING,related_name='bewertungs')
+   
     title = models.CharField(max_length= 250, null=True)
     autos_seite = models.CharField(max_length = 250)
     component_autos_seite = models.CharField(max_length=250)

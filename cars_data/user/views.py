@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db.models import Q
 from django.http import Http404
 from django.views.generic.edit import UpdateView
 from rest_framework import generics
@@ -36,6 +37,59 @@ class ModelsList(generics.ListAPIView):
            
         serializer= ModelSeriaizer(models,many=True)
         return Response(serializer.data)
+    
+
+# class ModelListFilterRepartur(APIView):
+#     def get_object(self,model_id):
+#         try:
+#             return Auto.objects.filter(Q(schaden = True) & Q(model=model_id))
+#         except Auto.DoesNotExist:
+#             raise Http404
+        
+#     def get(self,request,model_id,format=None):
+#        models = self.get_object(model_id)
+#        serializer=AutoSerializer(models,many=True)
+#        return Response(serializer.data)
+    
+
+class ModelListFilterReparatur(generics.ListAPIView):
+    serializer_class = AutoSerializer
+    model=Auto
+
+    def  get_queryset(self):
+        query = self.request.GET.get("search",'')
+
+        result = Auto.objects.filter(Q(model=int(query)))
+
+        result = result.filter(~Q(bewertungs=None))
+
+        result = result.filter(Q(bewertungs__schaden=True))
+
+
+        return result 
+    
+
+class ModelListtFilterPreis(generics.ListAPIView):
+    serializer_class = AutoSerializer
+    model= Auto
+    
+
+    def get_queryset(self):
+   
+        query = self.request.GET.get("search",'')
+       
+        result = Auto.objects.filter(Q(model=int(query)))
+
+        result = result.filter(~Q(bewertungs=None))
+
+        result = result.filter(Q(bewertungs__preis__gt=0))
+
+        return result
+
+
+    
+
+    
     
 class BewertungList(APIView):
    def get(self,request,format=None):

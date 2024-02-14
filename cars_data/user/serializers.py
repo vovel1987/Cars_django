@@ -20,7 +20,8 @@ class AutoSerializer(serializers.ModelSerializer):
             'title',
             'hersteller',
             'kilometerstand',
-            'schaden',
+            # 'schaden',
+            
            
         )
 class AutoPatchSerializer(serializers.ModelSerializer):
