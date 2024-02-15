@@ -21,6 +21,19 @@ class Model(models.Model):
         return ''
     def get_fahrz(self):
         return self.autos.all().count()
+    def get_reparatur(self):
+           result= self.autos.all().filter(bewertungs__schaden = True)
+           if result:
+               return True
+         
+           return False
+    def get_preis(self):
+        preis = self.autos.all().filter(bewertungs__preis__gt = 0)
+        if preis:
+            return True
+        return False
+
+        
         
  
         
@@ -53,6 +66,20 @@ class Auto(models.Model):
         if self.image:
             return   self.image.url
         return ''
+    
+
+    def get_reparatur(self):
+       
+           result=self.bewertungs.all().filter(schaden=True).distinct()
+           if result:
+               return True
+         
+           return False
+    def get_preis(self):
+        preis = self.bewertungs.all().filter(preis__gt = 0)
+        if preis:
+            return True
+        return False
     
     # def get_thumbnail(self):
     #        if self.thumbnail:
@@ -119,6 +146,9 @@ class Bewertung(models.Model):
     preis = models.IntegerField(null=True, blank=True)
     image_schaden = models.ImageField(upload_to=schaden_directory_path,blank=True,null=True)
     schaden = models.BooleanField(null= True)
+    zusatzReparatur = models.CharField(max_length=400,null=True,blank=True)
+    serviceLeistung=models.IntegerField(null=True,blank=True)
+
 
     def __str__(self):
         return self.title

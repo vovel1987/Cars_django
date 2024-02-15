@@ -21,6 +21,8 @@ class AutoSerializer(serializers.ModelSerializer):
             'hersteller',
             'kilometerstand',
             # 'schaden',
+            'get_reparatur',
+            'get_preis',
             
            
         )
@@ -50,6 +52,9 @@ class ModelSeriaizer(serializers.ModelSerializer):
             'id',
             'get_image',
             'get_fahrz',
+            'get_reparatur',
+            'get_preis',
+            'get_preis',
            
 
 
@@ -82,6 +87,28 @@ class BewertungSerializer(serializers.ModelSerializer):
             'get_image',
             'image_schaden',
             'schaden',
+            'zusatzReparatur',
+            'serviceLeistung',
+
+            
+        )
+
+class BewertungSerializerUpdate(serializers.ModelSerializer):
+    class Meta:
+        model = Bewertung
+        fields=(
+            'auto',
+            'autos_seite',
+            'component_autos_seite',
+            'element_in_component',
+            'schaden_descr',
+            'schaden_value',
+            'preis',
+            'image_schaden',
+            'schaden',
+            'zusatzReparatur',
+            'serviceLeistung',
+
             
         )
 

@@ -52,6 +52,30 @@ class ModelsList(generics.ListAPIView):
 #        return Response(serializer.data)
     
 
+class ModelFilterReparatur(generics.ListAPIView):
+    serializer_class=ModelSeriaizer
+    model=Model
+
+    def get_queryset(self):
+        result = Model.objects.filter(~Q(autos=None))
+        result = result.filter(Q(autos__bewertungs__schaden=True)).distinct()
+       
+
+ 
+        return result
+
+class ModelFilterPreis(generics.ListAPIView):
+    serializer_class=ModelSeriaizer
+    model=Model
+
+    def get_queryset(self):
+        result = Model.objects.filter(~Q(autos=None))
+        result = result.filter(Q(autos__bewertungs__preis__gt=0)).distinct()
+
+        return result
+    
+    
+
 class ModelListFilterReparatur(generics.ListAPIView):
     serializer_class = AutoSerializer
     model=Auto
@@ -205,6 +229,10 @@ class AutoUpdateView(generics.UpdateAPIView):
 class AutoPostView(generics.CreateAPIView):
     queryset = Auto.objects.all()
     serializer_class = AutoPatchSerializer
+
+class SchadenListUpdateView(generics.UpdateAPIView):
+    queryset = Bewertung.objects.all()
+    serializer_class= BewertungSerializerUpdate
      
         
       
