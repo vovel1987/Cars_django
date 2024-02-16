@@ -89,6 +89,8 @@ class BewertungSerializer(serializers.ModelSerializer):
             'schaden',
             'zusatzReparatur',
             'serviceLeistung',
+            'behoben',
+            'wird_behoben',
 
             
         )
@@ -108,6 +110,8 @@ class BewertungSerializerUpdate(serializers.ModelSerializer):
             'schaden',
             'zusatzReparatur',
             'serviceLeistung',
+            'behoben',
+            'wird_behoben',
 
             
         )

@@ -146,8 +146,11 @@ class Bewertung(models.Model):
     preis = models.IntegerField(null=True, blank=True)
     image_schaden = models.ImageField(upload_to=schaden_directory_path,blank=True,null=True)
     schaden = models.BooleanField(null= True)
-    zusatzReparatur = models.CharField(max_length=400,null=True,blank=True)
+    zusatzReparatur = models.TextField(max_length=400,null=True,blank=True)
     serviceLeistung=models.IntegerField(null=True,blank=True)
+    behoben=models.BooleanField(null=True,blank=True)
+    wird_behoben=models.BooleanField(null=True,blank=True)
+
 
 
     def __str__(self):
